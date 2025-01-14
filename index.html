@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usability Holmes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <h1>Usability Holmes</h1>
+
+        <!-- Exibe a contagem de perguntas restantes -->
+        <div id="questions-left-container" class="hidden">
+            <p>Perguntas restantes: <span id="remaining-questions"></span></p>
+        </div>
+
+        <!-- Botão de iniciar jogo -->
+        <div id="start-game-container">
+            <button id="start-game-button" class="company-button">Iniciar Jogo</button>
+        </div>
+
+        <div id="companies-container" class="hidden">
+            <!-- Empresas serão inseridas aqui -->
+        </div>
+
+        <!-- Tela do Problema de Usabilidade -->
+        <div id="usability-problem-container" class="hidden">
+            <h2 id="problem-title"></h2>
+            <p id="problem-description"></p>
+            <div id="answers-container"></div>
+            <div id="timer-container">
+                <p>Tempo restante: <span id="timer">60</span> segundos</p>
+            </div>
+        </div>
+
+        <h2 id="result-message"></h2>
+
+        <div id="game-result" class="hidden">
+            <h2>Resultado do Jogo</h2>
+            <p id="correct-answers">Respostas corretas: 0</p>
+            <p id="wrong-answers">Respostas erradas: 0</p>
+            <p id="final-score">Pontuação final: 0</p>
+            <button id="restart-game-button" class="company-button">Iniciar Novo Jogo</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
