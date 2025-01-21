@@ -1,6 +1,7 @@
+/* Cor de fundo e estrutura geral */
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #42a5f5, #478ed1);
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,6 +10,7 @@ body {
     color: #fff;
 }
 
+/* Container do botão de início */
 #start-game-container {
     display: flex;
     justify-content: center;
@@ -20,8 +22,24 @@ body {
 #start-game-button,
 #restart-game-button {
     margin: 10px;
+    padding: 12px 25px;
+    background-color: #2575fc;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
+#start-game-button:hover,
+#restart-game-button:hover {
+    transform: translateY(-5px);
+    background-color: #1e60b2;
+}
+
+/* Container do jogo */
 #game-container {
     text-align: center;
     width: 80%;
@@ -32,13 +50,16 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Título do jogo */
 h1 {
     font-size: 36px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
+    color: #fff;
 }
 
+/* Grid das empresas */
 #companies-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -52,7 +73,7 @@ h1 {
     align-items: center;
     justify-content: center;
     border: none;
-    background: #008CBA;
+    background: #6a11cb;
     padding: 15px 20px;
     border-radius: 8px;
     cursor: pointer;
@@ -68,10 +89,10 @@ h1 {
 
 .company-button:hover {
     transform: translateY(-5px);
-    background-color: #005f72;
+    background-color: #4e0c94;
 }
 
-.company-button:disabled {
+company-button:disabled {
     opacity: 0.7;
     cursor: not-allowed;
     background-color: #008CBA;
@@ -103,25 +124,27 @@ h1 {
 
 /* Estilos para o Modal */
 .modal {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.8); /* Aumentei um pouco a opacidade para um fundo mais denso */
+    z-index: 1000;
 }
 
 .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
+    background-color: #5c6bc0;
+    color: #fff;
+    padding: 30px;
+    border-radius: 10px;
     width: 60%;
     max-width: 600px;
     text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .hidden {
@@ -137,7 +160,7 @@ h1 {
     padding: 12px;
     margin: 12px 0;
     width: 100%;
-    background-color: #008CBA;
+    background-color: #6a11cb;
     color: white;
     border: none;
     cursor: pointer;
@@ -147,27 +170,24 @@ h1 {
 }
 
 .answer-button:hover {
-    background-color: #005f72;
+    background-color: #4e0c94;
     transform: scale(1.05);
 }
 
 #timer-container {
     margin-top: 20px;
-}
-
-#questions-left {
-    margin-top: 10px;
-    font-size: 14px;
+    font-size: 18px;
+    color: #fff;
 }
 
 /* Estilos para marcar as respostas */
 .correct {
-    background-color: green;
+    background-color: #28a745;
     color: white;
 }
 
 .wrong {
-    background-color: red;
+    background-color: #dc3545;
     color: white;
 }
 
@@ -177,8 +197,7 @@ h1 {
     color: white;
 }
 
-/* Media Queries para telas menores
-Smartphones em modo retrato (max-width 600px) */
+/* Media Queries para telas menores */
 @media (max-width: 600px) {
     #game-container {
         width: 90%;
@@ -189,7 +208,7 @@ Smartphones em modo retrato (max-width 600px) */
     }
 
     .company-button {
-        padding: 8px 16px;
+        padding: 10px 20px;
         font-size: 14px;
         width: 100%;
         margin: 10px 0;
@@ -204,70 +223,6 @@ Smartphones em modo retrato (max-width 600px) */
     #timer-container p {
         font-size: 14px;
     }
-
-    #questions-left p {
-        font-size: 12px;
-    }
-}
-
-/* Tablets em modo retrato (max-width 768px) */
-@media (max-width: 768px) {
-    #game-container {
-        width: 85%;
-    }
-
-    #companies-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .company-button {
-        padding: 10px 20px;
-        font-size: 15px;
-    }
-
-    .answer-button {
-        padding: 9px;
-        font-size: 15px;
-        margin: 10px 0;
-    }
-
-    #timer-container p {
-        font-size: 16px;
-    }
-
-    #questions-left p {
-        font-size: 13px;
-    }
-}
-
-/* Telas maiores (computadores e grandes telas) */
-@media (min-width: 1024px) {
-    #game-container {
-        width: 60%;
-    }
-
-    #companies-container {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .company-button {
-        padding: 12px 25px;
-        font-size: 18px;
-    }
-
-    .answer-button {
-        padding: 12px;
-        font-size: 18px;
-        margin: 12px 0;
-    }
-
-    #timer-container p {
-        font-size: 18px;
-    }
-
-    #questions-left p {
-        font-size: 16px;
-    }
 }
 
 @keyframes vibrate {
@@ -277,21 +232,17 @@ Smartphones em modo retrato (max-width 600px) */
 
     25% {
         transform: translateX(-7px);
-        /* Move para a esquerda */
     }
 
     50% {
         transform: translateX(7px);
-        /* Move para a direita */
     }
 
     75% {
         transform: translateX(-7px);
-        /* Move para a esquerda novamente */
     }
 
     100% {
         transform: translateX(0);
-        /* Retorna à posição original */
     }
 }

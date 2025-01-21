@@ -278,7 +278,6 @@ function startGame() {
             button.disabled = true;
             button.style.opacity = "0.3";
         } else {
-            button.style.backgroundColor = "red";
             button.classList.add("vibrate");
         }
 
@@ -357,20 +356,29 @@ function checkAnswer(heuristic) {
     clearInterval(timerInterval);
     const correct = heuristic.correct;
 
+    // Desabilita todos os botões de resposta após a escolha
+    const answerButtons = document.querySelectorAll(".answer-button");
+    answerButtons.forEach(button => {
+        button.disabled = true;
+    });
+
+    // Verifica se a resposta está correta e atualiza a pontuação
     if (correct) {
         correctAnswers++;
         score += 10;
     } else {
         wrongAnswers++;
-        score -= 5;
+        if (score >= 5) {
+            score -= 5;
+        }
     }
 
     answeredQuestions++;
 
+    // Atualiza a contagem de perguntas restantes
     document.getElementById("remaining-questions").innerText = `${totalQuestions - answeredQuestions} / ${totalQuestions}`;
 
     // Destaca as alternativas e mostra o sinal de acerto
-    const answerButtons = document.querySelectorAll(".answer-button");
     answerButtons.forEach(button => {
         if (button.innerText === heuristic.answer) {
             if (correct) {
@@ -382,6 +390,7 @@ function checkAnswer(heuristic) {
                 button.innerHTML += " ❌";
             }
         } else {
+            // Destaca a resposta correta
             if (button.innerText === currentProblem.heuristics.find(h => h.correct).answer) {
                 button.style.backgroundColor = "green";
                 button.innerHTML += " ✔️";
@@ -389,7 +398,7 @@ function checkAnswer(heuristic) {
         }
     });
 
-    // Atraso de 3 segundo para mostrar o feedback antes de ir para o próximo problema
+    // Atraso de 3 segundos para mostrar o feedback antes de ir para o próximo problema
     setTimeout(() => {
         showResult(correct);
     }, 3000);
@@ -400,11 +409,7 @@ function showResult(correct) {
     document.getElementById("usability-problem-modal").classList.add("hidden");
     const resultMessage = document.getElementById("result-message");
 
-    if (correct) {
-        resultMessage.innerText = `Você acertou! Pontuação: ${score}`;
-    } else {
-        resultMessage.innerText = `Você errou! Pontuação: ${score}`;
-    }
+    resultMessage.innerText = `Pontuação: ${score}`;
 
     // A próxima rodada começa automaticamente após 1 segundos
     setTimeout(() => {
