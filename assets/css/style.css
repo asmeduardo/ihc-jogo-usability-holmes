@@ -10,6 +10,10 @@ body {
     color: #fff;
 }
 
+p {
+    text-align: center;
+}
+
 /* Container do botão de início */
 #start-game-container {
     display: flex;
@@ -132,7 +136,7 @@ company-button:disabled {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.8); /* Aumentei um pouco a opacidade para um fundo mais denso */
+    background-color: rgba(0, 0, 0, 0.8);
     z-index: 1000;
 }
 
@@ -172,6 +176,16 @@ company-button:disabled {
 .answer-button:hover {
     background-color: #4e0c94;
     transform: scale(1.05);
+}
+
+#answer-feedback {
+    padding: 10px;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 20px;
 }
 
 #timer-container {

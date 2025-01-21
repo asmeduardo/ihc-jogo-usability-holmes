@@ -10,16 +10,33 @@
 
 <body>
     <div id="game-container">
-        <h1>Usability Homes</h1>
+        <!-- Tela de Introdução -->
+        <div id="intro-container">
+            <h1>Bem-vindo ao Usability Homes!</h1>
+            <p>Seu objetivo é ajudar empresas a resolver problemas de usabilidade em seus sites e sistemas. Cada empresa
+                tem questões sobre usabilidade. Você precisa identificar qual heurística de usabilidade de Nielsen
+                resolve o problema apresentado.</p>
+            <div id="start-game-container">
+                <button id="start-game-button">Iniciar Jogo</button>
+            </div>
+        </div>
+
+        <!-- Adiciona a área explicativa -->
+        <div id="game-introduction-text" class="hidden">
+            <h2>Identificando Problemas de Usabilidade</h2>
+            <p>A seguir, você verá empresas que enfrentam problemas de usabilidade. A empresa com o problema ativo
+                estará destacada com um alerta. Sua missão é clicar na empresa e identificar qual heurística de
+                usabilidade resolve o problema apresentado.
+            </p>
+            <p>
+                Lembre-se: o tempo é limitado, então seja rápido! A cada resposta correta, você ganhará pontos para sua
+                pontuação final.
+            </p>
+        </div>
 
         <!-- Exibe a contagem de perguntas restantes -->
         <div id="questions-left-container" class="hidden">
             <p>Perguntas restantes: <span id="remaining-questions"></span></p>
-        </div>
-
-        <!-- Botão de iniciar jogo -->
-        <div id="start-game-container">
-            <button id="start-game-button" class="company-buttn">Iniciar Jogo</button>
         </div>
 
         <div id="companies-container" class="hidden">
@@ -35,16 +52,22 @@
                 <div id="timer-container">
                     <p>Tempo restante: <span id="timer">60</span> segundos</p>
                 </div>
+                <div id="answer-feedback" class="hidden">
+                    <span id="feedback-message"></span>
+                </div>
             </div>
         </div>
 
-        <h2 id="result-message"></h2>
+        <div id="score-container" class="hidden">
+            Pontuação: <span id="score">0</span>
+        </div>
 
         <div id="game-result" class="hidden">
             <h2>Resultado do Jogo</h2>
             <p id="correct-answers">Respostas corretas: 0</p>
             <p id="wrong-answers">Respostas erradas: 0</p>
             <p id="final-score">Pontuação final: 0</p>
+            <p>"Bom trabalho! Cada acerto ajuda as empresas a melhorar a experiência dos usuários."</p>
             <button id="restart-game-button" class="company-button">Iniciar Novo Jogo</button>
         </div>
     </div>

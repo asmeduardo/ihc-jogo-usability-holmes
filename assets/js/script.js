@@ -237,13 +237,16 @@ function startGame() {
     // Inicializa a contagem total de questões
     totalQuestions = companies.reduce((total, company) => total + company.issues.length, 0);
 
-    // Exibe a contagem de perguntas restantes logo acima das empresas
+    document.getElementById("score-container").classList.remove("hidden");
     document.getElementById("questions-left-container").classList.remove("hidden");
     document.getElementById("remaining-questions").innerText = `${totalQuestions - answeredQuestions} / ${totalQuestions}`;
 
+    document.getElementById("intro-container").classList.add("hidden");
     document.getElementById("start-game-container").classList.add("hidden");
     document.getElementById("start-game-button").classList.add("hidden");
     document.getElementById("companies-container").classList.remove("hidden");
+
+    document.getElementById("game-introduction-text").classList.remove("hidden");
 
     const companiesContainer = document.getElementById("companies-container");
     companiesContainer.innerHTML = "";
@@ -315,7 +318,7 @@ function startProblem(company) {
     currentCompany = company;
     const remainingIssues = company.issues.filter(issue => !issue.answered);
     if (remainingIssues.length === 0) {
-        return showResult(false);
+        return showResult();
     }
     currentProblem = remainingIssues[Math.floor(Math.random() * remainingIssues.length)];
     currentProblem.answered = true;
@@ -345,13 +348,51 @@ function startProblem(company) {
 function updateTimer() {
     timeLeft--;
     document.getElementById("timer").innerText = timeLeft;
+
+    // Quando o tempo chega a zero
     if (timeLeft <= 0) {
         clearInterval(timerInterval);
-        showResult(false);
+
+        // Exibe a mensagem de tempo esgotado
+        showTimeUpMessage();
+
+        setTimeout(() => {
+            document.getElementById("feedback-message").classList.add("hidden");
+            showResult();
+        }, 3500);
     }
 }
 
-// Verifica a resposta do jogador
+function showTimeUpMessage() {
+    const feedbackMessage = document.getElementById("feedback-message");
+
+    feedbackMessage.innerText = "Tempo esgotado! Você perdeu a oportunidade de aprender e pontuar. :(";
+
+    const feedbackContainer = document.getElementById("answer-feedback");
+    feedbackContainer.classList.remove("hidden");
+}
+
+// Exibe a mensagem de resposta correta ou errada
+function showAnswerFeedback(correct) {
+    const feedbackContainer = document.getElementById("answer-feedback");
+    feedbackContainer.classList.remove("hidden");
+
+    const feedbackMessage = document.getElementById("feedback-message");
+
+    if (correct) {
+        feedbackMessage.innerText = "Resposta correta!";
+    } else {
+        feedbackMessage.innerText = "Resposta errada!";
+    }
+
+    // Ocultar o feedback após 2 segundos
+    setTimeout(() => {
+        feedbackContainer.classList.add("hidden");
+        showResult();
+    }, 2000);
+}
+
+// Função para verificar a resposta do jogador
 function checkAnswer(heuristic) {
     clearInterval(timerInterval);
     const correct = heuristic.correct;
@@ -368,15 +409,15 @@ function checkAnswer(heuristic) {
         score += 10;
     } else {
         wrongAnswers++;
-        if (score >= 5) {
-            score -= 5;
-        }
     }
 
     answeredQuestions++;
 
     // Atualiza a contagem de perguntas restantes
     document.getElementById("remaining-questions").innerText = `${totalQuestions - answeredQuestions} / ${totalQuestions}`;
+
+    // Atualiza a pontuação
+    document.getElementById("score").innerText = score;  // Atualiza o valor da pontuação na tela
 
     // Destaca as alternativas e mostra o sinal de acerto
     answerButtons.forEach(button => {
@@ -398,18 +439,16 @@ function checkAnswer(heuristic) {
         }
     });
 
-    // Atraso de 3 segundos para mostrar o feedback antes de ir para o próximo problema
-    setTimeout(() => {
-        showResult(correct);
-    }, 3000);
+    // Exibe o feedback de resposta correta/errada
+    showAnswerFeedback(correct);
 }
 
 // Exibe o resultado do jogo
-function showResult(correct) {
+function showResult() {
     document.getElementById("usability-problem-modal").classList.add("hidden");
-    const resultMessage = document.getElementById("result-message");
+    const resultMessage = document.getElementById("score");
 
-    resultMessage.innerText = `Pontuação: ${score}`;
+    resultMessage.innerText = score;
 
     // A próxima rodada começa automaticamente após 1 segundos
     setTimeout(() => {
@@ -423,7 +462,6 @@ function showResult(correct) {
 
 // Termina o jogo
 function endGame() {
-    document.getElementById("result-message").classList.add("hidden");
     document.getElementById("game-result").classList.remove("hidden");
 
     // Exibe as informações de respostas corretas, erradas e a pontuação
@@ -459,7 +497,7 @@ function nextRound() {
     startGame();
 }
 
-// Começa o jogo
+// Inicia o jogo
 document.getElementById("start-game-button").addEventListener("click", function () {
     updateAlert();
     startGame();
