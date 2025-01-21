@@ -1,0 +1,297 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #42a5f5, #478ed1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #fff;
+}
+
+#start-game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#start-game-button,
+#restart-game-button {
+    margin: 10px;
+}
+
+#game-container {
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#companies-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.company-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: #008CBA;
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.company-button.vibrate {
+    animation: vibrate 0.5s ease-in-out infinite;
+}
+
+.company-button:hover {
+    transform: translateY(-5px);
+    background-color: #005f72;
+}
+
+.company-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background-color: #008CBA;
+    box-shadow: none;
+}
+
+.icon-container {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    margin-bottom: 8px;
+}
+
+.company-icon {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+}
+
+.company-name {
+    font-size: 14px;
+    color: #f4f4f9;
+}
+
+/* Estilos para o Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+#answers-container {
+    margin-top: 20px;
+}
+
+.answer-button {
+    display: block;
+    padding: 12px;
+    margin: 12px 0;
+    width: 100%;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.answer-button:hover {
+    background-color: #005f72;
+    transform: scale(1.05);
+}
+
+#timer-container {
+    margin-top: 20px;
+}
+
+#questions-left {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Estilos para marcar as respostas */
+.correct {
+    background-color: green;
+    color: white;
+}
+
+.wrong {
+    background-color: red;
+    color: white;
+}
+
+.checkmark,
+.xmark {
+    margin-left: 10px;
+    color: white;
+}
+
+/* Media Queries para telas menores
+Smartphones em modo retrato (max-width 600px) */
+@media (max-width: 600px) {
+    #game-container {
+        width: 90%;
+    }
+
+    #companies-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .company-button {
+        padding: 8px 16px;
+        font-size: 14px;
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .answer-button {
+        padding: 8px;
+        font-size: 14px;
+        margin: 8px 0;
+    }
+
+    #timer-container p {
+        font-size: 14px;
+    }
+
+    #questions-left p {
+        font-size: 12px;
+    }
+}
+
+/* Tablets em modo retrato (max-width 768px) */
+@media (max-width: 768px) {
+    #game-container {
+        width: 85%;
+    }
+
+    #companies-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .company-button {
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+
+    .answer-button {
+        padding: 9px;
+        font-size: 15px;
+        margin: 10px 0;
+    }
+
+    #timer-container p {
+        font-size: 16px;
+    }
+
+    #questions-left p {
+        font-size: 13px;
+    }
+}
+
+/* Telas maiores (computadores e grandes telas) */
+@media (min-width: 1024px) {
+    #game-container {
+        width: 60%;
+    }
+
+    #companies-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .company-button {
+        padding: 12px 25px;
+        font-size: 18px;
+    }
+
+    .answer-button {
+        padding: 12px;
+        font-size: 18px;
+        margin: 12px 0;
+    }
+
+    #timer-container p {
+        font-size: 18px;
+    }
+
+    #questions-left p {
+        font-size: 16px;
+    }
+}
+
+@keyframes vibrate {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-7px);
+        /* Move para a esquerda */
+    }
+
+    50% {
+        transform: translateX(7px);
+        /* Move para a direita */
+    }
+
+    75% {
+        transform: translateX(-7px);
+        /* Move para a esquerda novamente */
+    }
+
+    100% {
+        transform: translateX(0);
+        /* Retorna à posição original */
+    }
+}
