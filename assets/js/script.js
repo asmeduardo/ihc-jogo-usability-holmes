@@ -1,12 +1,3 @@
-// Função para embaralhar as alternativas de respostas
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]]; // Troca os elementos
-    }
-    return array;
-}
-
 // Definindo as empresas e os problemas de usabilidade
 const companies = [
     {
@@ -227,11 +218,21 @@ let correctAnswers = 0;
 let wrongAnswers = 0;
 let alertCompanyIndex = null;
 
+// Embaralha as alternativas de respostas
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Troca os elementos
+    }
+    return array;
+}
+
+// Remove os acentos
 function removerAcentos(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-// Função para iniciar o jogo
+// Inicia o jogo
 function startGame() {
 
     // Inicializa a contagem total de questões
@@ -441,6 +442,12 @@ function checkAnswer(heuristic) {
 
     // Exibe o feedback de resposta correta/errada
     showAnswerFeedback(correct);
+
+    if (answeredQuestions >= totalQuestions) {
+        setTimeout(() => {
+            showResult();
+        }, 2000); // Aguarda 2 segundos antes de exibir o resultado
+    }
 }
 
 // Exibe o resultado do jogo
@@ -450,7 +457,6 @@ function showResult() {
 
     resultMessage.innerText = score;
 
-    // A próxima rodada começa automaticamente após 1 segundos
     setTimeout(() => {
         if (answeredQuestions < totalQuestions) {
             nextRound();
@@ -463,6 +469,7 @@ function showResult() {
 // Termina o jogo
 function endGame() {
     document.getElementById("game-result").classList.remove("hidden");
+    document.getElementById("score-container").classList.add("hidden");
 
     // Exibe as informações de respostas corretas, erradas e a pontuação
     document.getElementById("correct-answers").innerText = `Respostas corretas: ${correctAnswers}`;
