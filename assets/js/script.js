@@ -35,7 +35,7 @@ const companies = [
         ]
     },
     {
-        name: "E-commerce", issues: [
+        name: "Ecommerce", issues: [
             {
                 problem: "Ao adicionar produtos ao carrinho, o sistema não oferece nenhum tipo de feedback visual, o que pode causar incerteza no usuário sobre se a ação foi bem-sucedida.",
                 heuristics: shuffleArray([
@@ -492,6 +492,7 @@ function resetGame() {
     companies.forEach(company => company.issues.forEach(issue => issue.answered = false));
 
     document.getElementById("game-result").classList.add("hidden");
+    document.getElementById("score").innerText = 0;
 }
 
 // Próxima rodada
